@@ -15,6 +15,8 @@ public class TicketService {
         Ticket newTicket = new Ticket(employeeName,type,amount,status,id);
         ticketList.add(newTicket);
     }
+
+    public void addTicket(Ticket ticket){ticketList.add(ticket);}
     public Ticket getTicket(String employeeName){
        for(int i =0;i<ticketList.size();i++){
            Ticket t = ticketList.get(i);

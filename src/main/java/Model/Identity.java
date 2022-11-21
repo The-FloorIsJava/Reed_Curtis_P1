@@ -1,5 +1,10 @@
 package Model;
 
 public enum Identity {
-    Employee, Manager
+    Employee("Employee"), Manager("Manager");
+
+    String role;
+    Identity(String role){
+        this.role = role;
+    }
 }
