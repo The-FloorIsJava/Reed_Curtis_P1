@@ -10,21 +10,24 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
 
 
-public class TicketController {
+public class TicketController{
     TicketService ticketService;
     
     public TicketController(){ticketService = new TicketService();}
     
-    public void startAPI(){
-        Javalin app = Javalin.create().start(8080);
+    public void ticketEndpoint(Javalin app){
         app.post("ticket",this::postTicketHandler);
         app.get("ticket",this::getAllTicketsHandler);
         app.get("ticket/{employeeName}",this::getSpecifiedTicketHandler);
+        /*
+        app.post("ticket/{status}",this::updateTicketStatus);
+
+         */
     }
 
     private void getSpecifiedTicketHandler(Context context) {
         String employeeName = context.pathParam("employeeName");
-        Ticket ticket = ticketService.getTicket(employeeName);
+        Ticket ticket = ticketService.getTicketFromName(employeeName);
         context.json(ticket);
     }
 
@@ -39,4 +42,12 @@ public class TicketController {
         List<Ticket> allTickets = ticketService.getAllTickets();
         context.json(allTickets);
     }
+   /*
+    private void updateTicketStatus(Context context) {
+        String status = context.pathParam("status");
+        Ticket ticket = ticketService.getTicketFromId();
+
+    }
+
+    */
 }

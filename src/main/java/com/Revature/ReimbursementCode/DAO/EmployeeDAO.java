@@ -8,21 +8,31 @@ import java.util.List;
 
 import com.Revature.ReimbursementCode.UTIL.ConnectionFactory;
 import com.Revature.ReimbursementCode.UTIL.Crudable;
+import com.Revature.ReimbursementCode.UTIL.InvalidEmployeeInputException;
 
 
 public class EmployeeDAO implements Crudable<Employee> {
 
     public Employee create(Employee newEmployee) {
         try (Connection connection = ConnectionFactory.getConnectionFactory().getConnection()) {
-            String sql = "";
+            String sql = "insert into users (username,user_role,user_password) values (?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,newEmployee.getUserName());
-            preparedStatement.setString(2, newEmployee.getUserPassword());
+            preparedStatement.setString(2,newEmployee.getRole());
+            preparedStatement.setString(3, newEmployee.getUserPassword());
+
+            int checkInsert = preparedStatement.executeUpdate();
+
+            if(checkInsert == 0){
+                throw new RuntimeException("Employee was not added.");
+            }
+
+            return newEmployee;
 
         } catch (SQLException e) {
-
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
     public boolean delete(int id){return false;}
     public boolean update(Employee updatedEmployee){return false;}
@@ -37,6 +47,7 @@ public class EmployeeDAO implements Crudable<Employee> {
                 employees.add(convertSqlInfoToEmployee(resultSet));
             }
             return employees;
+
         } catch (SQLException e){
             e.printStackTrace();
             return null;
@@ -46,15 +57,15 @@ public class EmployeeDAO implements Crudable<Employee> {
 
     private Employee convertSqlInfoToEmployee(ResultSet resultSet) throws SQLException {
         Employee employee = new Employee();
-
         employee.setUserName(resultSet.getString("username"));
         employee.setUserPassword(resultSet.getString("user_password"));
         return employee;
     }
-/*
+
     public Employee loginCheck(String userName, String userPassword){
         try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()){
-            String sql = "select * from employee where username = ? and password = ?";
+            String sql = "select * from users where username = ? and user_password = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,userName);
             preparedStatement.setString(2,userPassword);
 
@@ -67,7 +78,4 @@ public class EmployeeDAO implements Crudable<Employee> {
             return null;
         }
     }
-
- */
-
 }

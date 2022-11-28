@@ -28,9 +28,10 @@ public class ConnectionFactory {
     public static ConnectionFactory getConnectionFactory(){
         return connectionFactory;
     }
+
     public Connection getConnection(){
         try{
-            return DriverManager.getConnection(properties.getProperty("url"),properties.getProperty("userName"),properties.getProperty("userPassword"));
+            return DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"), properties.getProperty("password"));
         } catch(SQLException e){
             e.printStackTrace();
             return null;

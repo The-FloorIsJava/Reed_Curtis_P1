@@ -3,6 +3,7 @@ package Controller;
 import Model.Employee;
 import com.Revature.ReimbursementCode.DAO.EmployeeDAO;
 import com.Revature.ReimbursementCode.Service.EmployeeService;
+import com.Revature.ReimbursementCode.UTIL.DTO.LoginCred;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
@@ -14,10 +15,12 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     Javalin app;
-    public EmployeeController(Javalin app){employeeService = new EmployeeService(new EmployeeDAO());}
+    public EmployeeController(Javalin app){
+        employeeService = new EmployeeService(new EmployeeDAO());
+        this.app = app;
+    }
 
-    public void startAPI(){
-        Javalin app = Javalin.create().start(8080);
+    public void employeeEndpoint(){
         app.post("employee", this::postEmployeeHandler);
         app.get("employee", this::getAllEmployeesHandler);
         app.get("employee/{userName}",this::getSpecifiedEmployeeHandler);
@@ -26,17 +29,19 @@ public class EmployeeController {
     }
 
     private void logoutHandler(Context context) {
+        String userName = employeeService.getSessionEmployee().getUserName();
+        employeeService.logout();
+        context.json(userName + " is now logged out");
     }
-/*
-    private void loginHandler(Context context) {
+
+    private void loginHandler(Context context) throws JsonProcessingException{
         ObjectMapper mapper = new ObjectMapper();
         LoginCred loginCred = mapper.readValue(context.body(), LoginCred.class);
-        employeeService.login(loginCred.getEmployeeName(), loginCred.getPassword());
+        employeeService.login(loginCred.getUserName(), loginCred.getPassword());
         context.json("You are now logged in");
     }
 
 
- */
     private void getSpecifiedEmployeeHandler(Context context) {
         String userName = context.pathParam("userName");
         Employee employee = employeeService.getEmployee(userName);

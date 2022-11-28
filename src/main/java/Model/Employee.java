@@ -1,12 +1,20 @@
 package Model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Employee {
+
+    private int userId;
     private String role;
     private String userName;
-    private String userPassword;
 
-public Employee (String role, String userName, String userPassword) {
-    this.role = Identity.Employee.role;
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  private String userPassword;
+
+public Employee (int userId, String userName, String userPassword,String role) {
+    this.userId = userId;
+    this.role = role;
     this.userName = userName;
     this.userPassword = userPassword;
 }
@@ -25,4 +33,7 @@ public Employee (String role, String userName, String userPassword) {
 
     public String getUserPassword(){return this.userPassword;}
 
+    public void setUserId(int userId) {this.userId = userId;}
+
+    public int getUserId() {return userId;}
 }

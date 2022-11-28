@@ -3,32 +3,39 @@ package Model;
 public class Ticket {
     private int id;
     private double amount;
-    private String type;
+
     private String employeeName;
+
+    private String description;
+
     private String status;
 
 
 
-    public Ticket(String employeeName,String type ,double amount,String status,int id){
+    public Ticket(int id, String employeeName, double amount, String description, String status){
         this.employeeName = employeeName;
-        this.type = type;
         this.amount = amount;
-        this.status = status;
         this.id = id;
-    }
-    public String getStatus(){
-        return status;
+        this.status = "Pending";
     }
 
-    public String getType(){
-        return type;
+    public Ticket() {
+
     }
+
+
 
     public String getEmployeeName(){return employeeName;}
-
     public double getAmount(){
         return amount;
     }
-
     public int getId(){return id;}
+    public String getDescription() {return description;}
+    public void setStatus(String status) {this.status = status;}
+
+    public void setAmount(double amount) {this.amount = amount;}
+
+    public void setEmployeeName(String employeeName) {this.employeeName = employeeName;}
+
+    public void setDescription(String description) {this.description = description;}
 }
