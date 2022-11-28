@@ -2,6 +2,8 @@ package com.Revature.ReimbursementCode.Service;
 
 import Model.Ticket;
 import com.Revature.ReimbursementCode.DAO.TicketDAO;
+import com.Revature.ReimbursementCode.UTIL.DTO.NotManager;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +17,7 @@ public class TicketService {
 
     public Ticket addTicket(Ticket ticket) {return ticketDAO.create(ticket);}
 
-
-    public Ticket getTicketFromName(String employeeName) {
-        for (int i = 0; i < ticketList.size(); i++) {
-            Ticket t = ticketList.get(i);
-            if (t.getEmployeeName().equals(employeeName)) {return ticketList.get(i);}
-        }
-        return null;
-    }
+    public List<Ticket> getTicketFromName(String employeeName) {return ticketDAO.findByName(employeeName);}
 
     public Ticket getTicketFromId(int id) {
         for (int i = 0; i < ticketList.size(); i++) {
@@ -45,22 +40,6 @@ public class TicketService {
 
     public List<Ticket> getAllTickets() {return ticketDAO.findAll();}
 
+    public boolean updateThisTicket(Ticket updatedTicket){return ticketDAO.update(updatedTicket);}
 
-    public List<Ticket> approveTicket(int id) {
-        for (int i = 0; i < ticketList.size(); i++) {
-            Ticket t = ticketList.get(i);
-            if (t.getId() == id) {t.setStatus("Approved");
-            }
-        } return null;
-    }
-
-
-    public List<Ticket> denyTicket(int id) {
-        for (int i = 0; i < ticketList.size(); i++) {
-            Ticket t = ticketList.get(i);
-            if (t.getId() == id) {t.setStatus("Denied");
-            }
-        }
-        return null;
-    }
 }
