@@ -42,23 +42,35 @@ public class TicketController{
 
     private void getSpecifiedTicketHandler(Context context) {
         String employeeName = context.pathParam("employeeName");
-        List<Ticket> tickets = ticketService.getTicketFromName(employeeName);
-        context.json(tickets);
+        if (!employeeService.getSessionEmployee().getUserName().equals(employeeName)) {
+            context.json("You do not have permission to do that.");
+        } else {
+            List<Ticket> tickets = ticketService.getTicketFromName(employeeName);
+            context.json(tickets);
+        }
     }
 
     private void postTicketHandler(Context context) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Ticket ticket = mapper.readValue(context.body(),Ticket.class);
-        ticketService.addTicket(ticket);
-        context.json(ticket);
+        if(ticket.getDescription() == null || ticket.getDescription().trim() == ""){
+            context.json("Please make sure the description is filled in.");
+            return;
+        }else if(ticket.getAmount() == 0.00){
+            context.json("Please make sure the amount is filled in.");
+            return;
+        }else{
+            ticketService.addTicket(ticket);
+            context.json(ticket);
+        }
     }
 
     private void getAllTicketsHandler(Context context) {
-        if(employeeService.roleCheck() == false){
-            throw new InvalidEmployeeInputException("You do not have permission to do that.");
+        if (authCheck(context)) return;
+        {
+            List<Ticket> allTickets = ticketService.getAllTickets();
+            context.json(allTickets);
         }
-        List<Ticket> allTickets = ticketService.getAllTickets();
-        context.json(allTickets);
     }
     public boolean authCheck(Context context){
         if(!employeeService.roleCheck()) {
