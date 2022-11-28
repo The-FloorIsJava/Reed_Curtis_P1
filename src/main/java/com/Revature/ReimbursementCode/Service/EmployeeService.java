@@ -12,7 +12,6 @@ public class EmployeeService {
     List<Employee> employeeList;
     private Employee sessionEmployee = null;
 
-
     public EmployeeService(EmployeeDAO employeeDAO){this.employeeDAO = employeeDAO;}
 
     public Employee addEmployee(Employee employee){return employeeDAO.create(employee);}
@@ -34,6 +33,12 @@ public class EmployeeService {
     }
 
     public Employee getSessionEmployee(){return sessionEmployee;}
+
+    public boolean roleCheck(){
+        if(sessionEmployee.getRole().equals("Employee")){
+            return false;
+        } else {return true;}
+    }
     /*
     public void addEmployee(String role, String userName, String userPassword){
         Employee newEmployee = new Employee(role,userName,userPassword);

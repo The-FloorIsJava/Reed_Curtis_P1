@@ -15,8 +15,8 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     Javalin app;
-    public EmployeeController(Javalin app){
-        employeeService = new EmployeeService(new EmployeeDAO());
+    public EmployeeController(Javalin app,EmployeeService employeeService){
+        this.employeeService = employeeService;
         this.app = app;
     }
 
@@ -31,14 +31,14 @@ public class EmployeeController {
     private void logoutHandler(Context context) {
         String userName = employeeService.getSessionEmployee().getUserName();
         employeeService.logout();
-        context.json(userName + " is now logged out");
+        context.json(userName + " is now logged out.");
     }
 
     private void loginHandler(Context context) throws JsonProcessingException{
         ObjectMapper mapper = new ObjectMapper();
         LoginCred loginCred = mapper.readValue(context.body(), LoginCred.class);
         employeeService.login(loginCred.getUserName(), loginCred.getPassword());
-        context.json("You are now logged in");
+        context.json(loginCred.getUserName() + " is now logged in.");
     }
 
 

@@ -2,8 +2,10 @@ package Controller;
 
 import Model.Ticket;
 import com.Revature.ReimbursementCode.DAO.TicketDAO;
+import com.Revature.ReimbursementCode.Service.EmployeeService;
 import com.Revature.ReimbursementCode.Service.TicketService;
-import com.Revature.ReimbursementCode.UTIL.DTO.NotManager;
+import com.Revature.ReimbursementCode.UTIL.DTO.NotManagerException;
+import com.Revature.ReimbursementCode.UTIL.InvalidEmployeeInputException;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,9 +16,12 @@ import java.util.List;
 
 public class TicketController{
     TicketService ticketService;
+    EmployeeService employeeService;
+
     Javalin app;
     
-    public TicketController(){
+    public TicketController(EmployeeService employeeService){
+        this.employeeService = employeeService;
         ticketService = new TicketService(new TicketDAO());
     }
     
@@ -25,13 +30,10 @@ public class TicketController{
         app.get("ticket",this::getAllTicketsHandler);
         app.get("ticket/{employeeName}",this::getSpecifiedTicketHandler);
         app.post("ticket/{id}",this::postUpdatedTicketHandler);
-        /*
-        app.post("ticket/{status}",this::updateTicketStatus);
-
-         */
     }
 
     private void postUpdatedTicketHandler(Context context) throws JsonProcessingException{
+        if(authCheck(context)) return;
         ObjectMapper mapper = new ObjectMapper();
         Ticket updatedTicket = mapper.readValue(context.body(),Ticket.class);
         ticketService.updateThisTicket(updatedTicket);
@@ -52,15 +54,17 @@ public class TicketController{
     }
 
     private void getAllTicketsHandler(Context context) {
+        if(employeeService.roleCheck() == false){
+            throw new InvalidEmployeeInputException("You do not have permission to do that.");
+        }
         List<Ticket> allTickets = ticketService.getAllTickets();
         context.json(allTickets);
     }
-   /*
-    private void updateTicketStatus(Context context) {
-        String status = context.pathParam("status");
-        Ticket ticket = ticketService.getTicketFromId();
-
+    public boolean authCheck(Context context){
+        if(!employeeService.roleCheck()) {
+            context.json("You do not have permission to do that.");
+            context.status(403);
+            return true;
+        } return false;
     }
-
-    */
 }

@@ -1,13 +1,9 @@
 package com.Revature.ReimbursementCode.DAO;
 
-import Model.Employee;
 import Model.Ticket;
 import com.Revature.ReimbursementCode.UTIL.ConnectionFactory;
 import com.Revature.ReimbursementCode.UTIL.Crudable;
-import com.Revature.ReimbursementCode.UTIL.DTO.NotManager;
-import com.Revature.ReimbursementCode.UTIL.InvalidEmployeeInputException;
 
-import java.net.ConnectException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +30,7 @@ public class TicketDAO implements Crudable<Ticket> {
         }
     }
 
-    public boolean delete(int id) {
-        return false;
-    }
+    public boolean delete(int id) {return false;}
 
     public boolean update(Ticket updatedTicket){
         try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()){
@@ -58,9 +52,10 @@ public class TicketDAO implements Crudable<Ticket> {
     public List<Ticket> findByName(String employeeName){
         try (Connection connection = ConnectionFactory.getConnectionFactory().getConnection()){
             List<Ticket> tickets = new ArrayList<>();
-            String sql = "SELECT * FROM tickets WHERE employee_name='?'";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            String sql = "SELECT * FROM tickets WHERE employee_name=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,employeeName);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 tickets.add(convertSqlInfoToTicket(resultSet));
             }
