@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/EmployeeDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/TicketDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/Project1.sql" dialect="PostgreSQL" />
   </component>
 </project>

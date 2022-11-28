@@ -10,16 +10,17 @@ import com.Revature.ReimbursementCode.UTIL.ConnectionFactory;
 import com.Revature.ReimbursementCode.UTIL.Crudable;
 import com.Revature.ReimbursementCode.UTIL.InvalidEmployeeInputException;
 
+import javax.swing.plaf.nimbus.State;
+
 
 public class EmployeeDAO implements Crudable<Employee> {
 
     public Employee create(Employee newEmployee) {
         try (Connection connection = ConnectionFactory.getConnectionFactory().getConnection()) {
-            String sql = "insert into users (username,user_role,user_password) values (?,?,?)";
+            String sql = "INSERT INTO users (username,user_password) VALUES (?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,newEmployee.getUserName());
-            preparedStatement.setString(2,newEmployee.getRole());
-            preparedStatement.setString(3, newEmployee.getUserPassword());
+            preparedStatement.setString(2, newEmployee.getUserPassword());
 
             int checkInsert = preparedStatement.executeUpdate();
 
@@ -30,13 +31,46 @@ public class EmployeeDAO implements Crudable<Employee> {
             return newEmployee;
 
         } catch (SQLException e) {
+
             e.printStackTrace();
             return null;
         }
     }
     public boolean delete(int id){return false;}
     public boolean update(Employee updatedEmployee){return false;}
-    public Employee findById(int id){return null;}
+    public Employee findById(int id){
+        try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()) {
+            List<Employee> employees = new ArrayList<>();
+            String sql = "select * from users where user_id=id";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                employees.add(convertSqlInfoToEmployee(resultSet));
+            }
+            return employees.get(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    /*
+    public Employee findByName(String userName){
+        try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()) {
+            List<Employee> employees = new ArrayList<>();
+            String sql = "select * from users where username='userName'";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                employees.add(convertSqlInfoToEmployee(resultSet));
+            }
+            return employees.get();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+     */
     public List<Employee> findAll(){
         try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()){
             List<Employee> employees = new ArrayList<>();
@@ -57,6 +91,8 @@ public class EmployeeDAO implements Crudable<Employee> {
 
     private Employee convertSqlInfoToEmployee(ResultSet resultSet) throws SQLException {
         Employee employee = new Employee();
+        employee.setUserId(resultSet.getInt("user_id"));
+        employee.setRole(resultSet.getString("user_role"));
         employee.setUserName(resultSet.getString("username"));
         employee.setUserPassword(resultSet.getString("user_password"));
         return employee;

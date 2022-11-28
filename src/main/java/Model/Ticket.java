@@ -16,15 +16,15 @@ public class Ticket {
         this.employeeName = employeeName;
         this.amount = amount;
         this.id = id;
-        this.status = "Pending";
+        this.status = status;
     }
 
     public Ticket() {
 
     }
 
-
-
+    public void setId(int id) {this.id = id;}
+    public String getStatus() {return status;}
     public String getEmployeeName(){return employeeName;}
     public double getAmount(){
         return amount;
@@ -32,7 +32,6 @@ public class Ticket {
     public int getId(){return id;}
     public String getDescription() {return description;}
     public void setStatus(String status) {this.status = status;}
-
     public void setAmount(double amount) {this.amount = amount;}
 
     public void setEmployeeName(String employeeName) {this.employeeName = employeeName;}

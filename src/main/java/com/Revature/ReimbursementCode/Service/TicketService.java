@@ -1,24 +1,19 @@
 package com.Revature.ReimbursementCode.Service;
 
 import Model.Ticket;
+import com.Revature.ReimbursementCode.DAO.TicketDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TicketService {
     List<Ticket> ticketList;
+    private final TicketDAO ticketDAO;
+    private Ticket sessionTicket = null;
 
+    public TicketService(TicketDAO ticketDAO) {this.ticketDAO = ticketDAO;}
 
-    public TicketService() {
-        ticketList = new ArrayList<>();
-    }
-
-    public void addTicket(int id, String employeeName, double amount, String description, String status) {
-        Ticket newTicket = new Ticket(id,employeeName,amount,description,status);
-        ticketList.add(newTicket);
-    }
-
-    public void addTicket(Ticket ticket) {ticketList.add(ticket);}
+    public Ticket addTicket(Ticket ticket) {return ticketDAO.create(ticket);}
 
 
     public Ticket getTicketFromName(String employeeName) {
@@ -48,9 +43,7 @@ public class TicketService {
     }
 
 
-    public List<Ticket> getAllTickets() {
-        return ticketList;
-    }
+    public List<Ticket> getAllTickets() {return ticketDAO.findAll();}
 
 
     public List<Ticket> approveTicket(int id) {

@@ -23,6 +23,8 @@ public Employee (int userId, String userName, String userPassword,String role) {
 
     }
 
+    public void setRole(String role) {this.role = role;}
+
     public void setUserName(String userName) {this.userName = userName;}
 
     public void setUserPassword(String userPassword){this.userPassword = userPassword;}
@@ -36,4 +38,5 @@ public Employee (int userId, String userName, String userPassword,String role) {
     public void setUserId(int userId) {this.userId = userId;}
 
     public int getUserId() {return userId;}
+
 }

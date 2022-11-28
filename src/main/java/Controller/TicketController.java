@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Ticket;
+import com.Revature.ReimbursementCode.DAO.TicketDAO;
 import com.Revature.ReimbursementCode.Service.TicketService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -12,8 +13,11 @@ import java.util.List;
 
 public class TicketController{
     TicketService ticketService;
+    Javalin app;
     
-    public TicketController(){ticketService = new TicketService();}
+    public TicketController(){
+        ticketService = new TicketService(new TicketDAO());
+    }
     
     public void ticketEndpoint(Javalin app){
         app.post("ticket",this::postTicketHandler);
@@ -39,8 +43,8 @@ public class TicketController{
     }
 
     private void getAllTicketsHandler(Context context) {
-        List<Ticket> allTickets = ticketService.getAllTickets();
-        context.json(allTickets);
+            List<Ticket> allTickets = ticketService.getAllTickets();
+            context.json(allTickets);
     }
    /*
     private void updateTicketStatus(Context context) {

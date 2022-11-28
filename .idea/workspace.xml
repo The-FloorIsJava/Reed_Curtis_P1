@@ -4,22 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="362719a9-4d72-4da1-9785-ee37c281b4d8" name="Changes" comment="-m Added DAO, CRUD, ConnectionFactory and additions to controller and services.">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/ReimbursementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="362719a9-4d72-4da1-9785-ee37c281b4d8" name="Changes" comment="-m Login/register feature done, had gitignore db.properties">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/EmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/TicketController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/EmployeeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/TicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/TicketDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/TicketReimbursementSystem.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/TicketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/UTIL/ConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/UTIL/ConnectionFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +94,9 @@
       <workItem from="1669230520474" duration="215000" />
       <workItem from="1669241093184" duration="1850000" />
       <workItem from="1669553549835" duration="12760000" />
-      <workItem from="1669596839796" duration="1399000" />
+      <workItem from="1669596839796" duration="2350000" />
+      <workItem from="1669600764166" duration="7954000" />
+      <workItem from="1669644447399" duration="7630000" />
     </task>
     <task id="LOCAL-00001" summary="-m added controller and services">
       <created>1668725008104</created>
@@ -124,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669071777219</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="-m Login/register feature done, had gitignore db.properties">
+      <created>1669598582278</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669598582278</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +148,7 @@
     <MESSAGE value="-m added controller and services" />
     <MESSAGE value="-m keeping up to date for new pc build. Did some variable changes and service work." />
     <MESSAGE value="-m Added DAO, CRUD, ConnectionFactory and additions to controller and services." />
-    <option name="LAST_COMMIT_MESSAGE" value="-m Added DAO, CRUD, ConnectionFactory and additions to controller and services." />
+    <MESSAGE value="-m Login/register feature done, had gitignore db.properties" />
+    <option name="LAST_COMMIT_MESSAGE" value="-m Login/register feature done, had gitignore db.properties" />
   </component>
 </project>
