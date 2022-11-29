@@ -35,6 +35,7 @@ public class TicketService {
     }
 
 
+    public List<Ticket> getAllPendingTickets() {return ticketDAO.findAllPending();}
     public List<Ticket> getAllTickets() {return ticketDAO.findAll();}
 
     public boolean updateThisTicket(Ticket updatedTicket){return ticketDAO.update(updatedTicket);}

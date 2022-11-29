@@ -68,7 +68,24 @@ public class TicketDAO implements Crudable<Ticket> {
 
     public Ticket findById(int id){return null;}
 
-    public List<Ticket> findAll() {
+
+    public List<Ticket> findAll(){
+        try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()){
+            List<Ticket> tickets = new ArrayList<>();
+            String sql = "SELECT * FROM tickets";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                tickets.add(convertSqlInfoToTicket(resultSet));
+            }
+            return tickets;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Ticket> findAllPending() {
         try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()){
             List<Ticket> tickets = new ArrayList<>();
             String sql = "SELECT * FROM tickets WHERE status = 'Pending'";

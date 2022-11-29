@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="362719a9-4d72-4da1-9785-ee37c281b4d8" name="Changes" comment="-m Finished role check. Need to implement checks for username and ticket amount/desc.">
+    <list default="true" id="362719a9-4d72-4da1-9785-ee37c281b4d8" name="Changes" comment="-m Username check and ticket amount/description check done. Give message that shows username is taken.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/TicketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/EmployeeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/TicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/DAO/TicketDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/ReimbursementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/ReimbursementSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Revature/ReimbursementCode/Service/TicketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +96,7 @@
       <workItem from="1669600764166" duration="7954000" />
       <workItem from="1669644447399" duration="15393000" />
       <workItem from="1669662597005" duration="6668000" />
-      <workItem from="1669671796368" duration="2797000" />
+      <workItem from="1669671796368" duration="7366000" />
     </task>
     <task id="LOCAL-00001" summary="-m added controller and services">
       <created>1668725008104</created>
@@ -145,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669669103217</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="-m Username check and ticket amount/description check done. Give message that shows username is taken.">
+      <created>1669674634485</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669674634485</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +180,7 @@
     <MESSAGE value="-m All done but update tickets, displaying proper messages in postman" />
     <MESSAGE value="-m Finished updating tickets, need to finish role check." />
     <MESSAGE value="-m Finished role check. Need to implement checks for username and ticket amount/desc." />
-    <option name="LAST_COMMIT_MESSAGE" value="-m Finished role check. Need to implement checks for username and ticket amount/desc." />
+    <MESSAGE value="-m Username check and ticket amount/description check done. Give message that shows username is taken." />
+    <option name="LAST_COMMIT_MESSAGE" value="-m Username check and ticket amount/description check done. Give message that shows username is taken." />
   </component>
 </project>

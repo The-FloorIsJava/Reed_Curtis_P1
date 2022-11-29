@@ -18,9 +18,9 @@ public class EmployeeService {
 
     public Employee getEmployee(String userName){return null;}
 
-    public void removeEmployee(String userName){
+    public void removeEmployee(String userName){}
 
-    }
+    public List<Employee> getEmployeeNames(){return employeeDAO.findAllNames();}
 
     public List<Employee> getAllEmployees(){return employeeDAO.findAll();}
 

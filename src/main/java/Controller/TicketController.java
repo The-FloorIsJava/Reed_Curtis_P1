@@ -27,7 +27,8 @@ public class TicketController{
     
     public void ticketEndpoint(Javalin app){
         app.post("ticket",this::postTicketHandler);
-        app.get("ticket",this::getAllTicketsHandler);
+        app.get("ticket",this::getAllPendingTicketsHandler);
+        app.get("tickets",this::getAllTicketsHandler);
         app.get("ticket/{employeeName}",this::getSpecifiedTicketHandler);
         app.post("ticket/{id}",this::postUpdatedTicketHandler);
     }
@@ -65,8 +66,15 @@ public class TicketController{
         }
     }
 
-    private void getAllTicketsHandler(Context context) {
+    private void getAllPendingTicketsHandler(Context context) {
         if (authCheck(context)) return;
+        {
+            List<Ticket> allPendingTickets = ticketService.getAllPendingTickets();
+            context.json(allPendingTickets);
+        }
+    }
+    private void getAllTicketsHandler(Context context) {
+        if(authCheck(context)) return;
         {
             List<Ticket> allTickets = ticketService.getAllTickets();
             context.json(allTickets);

@@ -86,8 +86,22 @@ public class EmployeeDAO implements Crudable<Employee> {
             e.printStackTrace();
             return null;
         }
-
     }
+    public List<Employee> findAllNames(){
+        List<Employee> employees = new ArrayList<>();
+        try(Connection connection = ConnectionFactory.getConnectionFactory().getConnection()){
+            String sql = "SELECT username FROM users";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                employees.add(convertSqlInfoToEmployee(resultSet));
+            }
+            return employees;
+        } catch (SQLException e){
+            e.printStackTrace();
+        } return employees;
+    }
+
 
     private Employee convertSqlInfoToEmployee(ResultSet resultSet) throws SQLException {
         Employee employee = new Employee();
